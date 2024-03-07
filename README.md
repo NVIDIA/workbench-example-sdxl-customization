@@ -4,6 +4,8 @@ This is an [NVIDIA AI Workbench](https://www.nvidia.com/en-us/deep-learning-ai/s
 Have questions? Please direct any issues, fixes, suggestions, and discussion on this project to the DevZone Members Only Forum thread [here](https://forums.developer.nvidia.com/t/support-workbench-example-project-sdxl-customization/278374/1). 
 
 ## Project Description
+For a short demo and project overview, check out this [video](https://www.youtube.com/watch?v=ntMRzPzSvM4)!
+
 Over the past few years Generative AI models have popped up everywhere - from creating realistic responses to complex questions, to generating images and music to impress art critics around the globe. In this project we use the Hugging Face Stable Diffusion XL (SDXL) model to create images from text prompts. You'll see how to import the SDXL model and use it to generate an image. 
 
 From there, you'll see how you can fine-tune the model using DreamBooth. We'll use a small number of photos of Toy Jensen to fine-tune the model. This will allow us to generate new images that include Toy Jensen when the model didn't previously recognize him. After that, you'll have the chance to fine-tune the model on your own images. Perhaps you want to create an image of you at the bottom of the ocean, or in outer space? By the end of this notebook you will be able to!

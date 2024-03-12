@@ -4,7 +4,7 @@ diffusers==0.21.4
 ipywidgets==8.1.1
 accelerate==0.23.0
 huggingface_hub[cli,torch]==0.17.3
-jupyterlab==2.3.2
+jupyterlab==3.6.7
 notebook==6.4.10
 torchvision==0.16.0a0
 nvtx==0.2.5

@@ -49,7 +49,6 @@ environment:
       uid: ""
       gid: ""
       username: ""
-      is_root: null
     package_managers:
     - name: pip
       binary_path: /opt/conda/bin/pip
@@ -85,12 +84,12 @@ execution:
   - name: jupyterlab
     type: jupyterlab
     class: webapp
-    start_command: jupyter notebook --allow-root --port 8888 --ip 0.0.0.0 --no-browser
+    start_command: jupyter lab --allow-root --port 8888 --ip 0.0.0.0 --no-browser
       --NotebookApp.base_url=\$PROXY_PREFIX --NotebookApp.default_url=/lab
-    health_check_command: '[ \$(echo url=\$(jupyter notebook list | head -n 2 | tail
-      -n 1 | cut -f1 -d'' '' | grep -v ''Currently'' | sed "s@/?@/lab?@g") | curl
-      -o /dev/null -s -w ''%{http_code}'' --config -) == ''200'' ]'
-    stop_command: jupyter notebook stop 8888
+    health_check_command: '[ \$(echo url=\$(jupyter lab list 2>&1 | head -n 2 | tail
+      -n 1 | cut -f1 -d'''' '''' | grep -v ''''Currently'''' | sed ''''s@/?@/lab?@g'''')
+      | curl -o /dev/null -s -w ''''%{http_code}'''' --config -) == ''''200'''' ]'
+    stop_command: jupyter lab stop 8888
     user_msg: ""
     icon_url: ""
     webapp_options:
@@ -98,7 +97,7 @@ execution:
       port: "8888"
       proxy:
         trim_prefix: false
-      url_command: jupyter notebook list | head -n 2 | tail -n 1 | cut -f1 -d' ' |
+      url_command: jupyter lab list 2>&1 | head -n 2 | tail -n 1 | cut -f1 -d' ' |
         grep -v 'Currently'
   resources:
     gpu:

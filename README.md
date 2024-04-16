@@ -1,5 +1,5 @@
 # NVIDIA AI Workbench: Introduction
-This is an [NVIDIA AI Workbench](https://www.nvidia.com/en-us/deep-learning-ai/solutions/data-science/workbench/) example Project that demonstrates how to customize a Stable Diffusion XL (SDXL) model. This project takes the latest SDXL model and familiarizes it with Toy Jensen via finetuning on a few pictures, thereby teaching it to generate new images which include him when it didn't recognize him previously. Next, we will also enable the user to bring their own custom image data to fine-tune the model on. Users in the [AI Workbench Beta Program](https://developer.nvidia.com/ai-workbench-beta) can get up and running with this Project in minutes. 
+This is an [NVIDIA AI Workbench](https://www.nvidia.com/en-us/deep-learning-ai/solutions/data-science/workbench/) example Project that demonstrates how to customize a Stable Diffusion XL (SDXL) model. This project takes the latest SDXL model and familiarizes it with Toy Jensen via finetuning on a few pictures, thereby teaching it to generate new images which include him when it didn't recognize him previously. Next, we will also enable the user to bring their own custom image data to fine-tune the model on. Users who have [installed AI Workbench](https://www.nvidia.com/en-us/deep-learning-ai/solutions/data-science/workbench/) can get up and running with this project in minutes. 
 
 Have questions? Please direct any issues, fixes, suggestions, and discussion on this project to the DevZone Members Only Forum thread [here](https://forums.developer.nvidia.com/t/support-workbench-example-project-sdxl-customization/278374/1). 
 
@@ -61,7 +61,7 @@ If you have NVIDIA AI Workbench already installed, you can use this Project in A
 ---
 
 ## Tested On
-This notebook has been tested with an NVIDIA A100-80gb GPU and the following version of NVIDIA AI Workbench: ```nvwb 0.5.3 (internal; linux; amd64; go1.21.3; Tue Oct 17 14:22:21 UTC 2023)```
+This notebook has been tested with an NVIDIA RTX A6000 GPU and the following version of NVIDIA AI Workbench: ```nvwb 0.21.3 (internal; linux; amd64; go1.21.3; Tue Mar  5 03:55:43 UTC 2024)```
 
 ## License
 This NVIDIA AI Workbench example project is under the [Apache 2.0 License](https://github.com/nv-edwli/sdxl-customization/blob/main/LICENSE.txt)

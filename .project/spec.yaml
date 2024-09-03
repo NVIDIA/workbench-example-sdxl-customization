@@ -37,7 +37,23 @@ environment:
     - jupyterlab
     - cuda12.2
     - pytorch2.1
-    apps: []
+    apps: 
+    - name: inference
+      type: custom
+      class: webapp
+      start_command: cd /project/code/ && PROXY_PREFIX=$PROXY_PREFIX python3 -m chatui
+      health_check_command: curl -f "http://localhost:8080/"
+      stop_command: pkill -f "^python3 -m chatui"
+      user_msg: ""
+      logfile_path: ""
+      timeout_seconds: 0
+      icon_url: ""
+      webapp_options:
+        autolaunch: true
+        port: "8080"
+        proxy:
+          trim_prefix: true
+        url: http://localhost:8080/
     programming_languages:
     - python3
     icon_url: ""

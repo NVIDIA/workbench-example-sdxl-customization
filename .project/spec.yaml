@@ -1,5 +1,5 @@
 specVersion: v2
-specMinorVersion: 1
+specMinorVersion: 2
 meta:
   name: sdxl-customization
   image: project-sdxl-customization
@@ -37,7 +37,7 @@ environment:
     - jupyterlab
     - cuda12.2
     - pytorch2.1
-    apps: 
+    apps:
     - name: inference
       type: custom
       class: webapp
@@ -46,7 +46,7 @@ environment:
       stop_command: pkill -f "^python3 -m chatui"
       user_msg: ""
       logfile_path: ""
-      timeout_seconds: 0
+      timeout_seconds: 60
       icon_url: ""
       webapp_options:
         autolaunch: true
@@ -109,7 +109,7 @@ execution:
     stop_command: jupyter lab stop 8888
     user_msg: ""
     logfile_path: ""
-    timeout_seconds: 0
+    timeout_seconds: 60
     icon_url: ""
     webapp_options:
       autolaunch: true

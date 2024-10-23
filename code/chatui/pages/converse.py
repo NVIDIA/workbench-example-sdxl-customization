@@ -26,6 +26,7 @@ import time
 import sys
 import torch
 import logging
+import gc
 
 from chatui import assets, chat_client
 from chatui.utils import logger
@@ -88,6 +89,14 @@ INSTRUCTIONS = """
 
 sys.stdout = logger.Logger("/project/code/output.log")
 
+print("--- MODELS: Loading Model " + BASE_MODEL + " ---")
+pipe = StableDiffusionXLPipeline.from_pretrained(
+    BASE_MODEL, torch_dtype=torch.float16, variant="fp16", use_safetensors=True
+)
+print("--- MODELS: Configuring Pipe ---")
+pipe.to("cuda")
+print("--- MODELS: Model is ready for inference ---")
+
 def build_page(client: chat_client.ChatClient) -> gr.Blocks:
     """
     Build the gradio page to be mounted in the frame.
@@ -107,13 +116,7 @@ def build_page(client: chat_client.ChatClient) -> gr.Blocks:
 
     # Prep base model
     logging.basicConfig(level=logging.INFO)
-    print("--- MODELS: Loading Model " + BASE_MODEL + " ---")
-    pipe = StableDiffusionXLPipeline.from_pretrained(
-        BASE_MODEL, torch_dtype=torch.float16, variant="fp16", use_safetensors=True
-    )
-    print("--- MODELS: Configuring Pipe ---")
-    pipe.to("cuda")
-    print("--- MODELS: Model is ready for inference ---")
+    global pipe
 
     with gr.Blocks(title=TITLE, theme=kui_theme, css=kui_styles + _LOCAL_CSS) as page:
         gr.Markdown(f"# {TITLE}")
@@ -132,7 +135,7 @@ def build_page(client: chat_client.ChatClient) -> gr.Blocks:
                 # Main chatbot panel. 
                 with gr.Row(equal_height=True):
                     with gr.Column(min_width=350):
-                        chatbot = gr.Chatbot(show_label=False, height=750)
+                        chatbot = gr.Chatbot(show_label=False, height=575)
 
                 # Message box for user input
                 with gr.Row(equal_height=True):
@@ -165,8 +168,8 @@ def build_page(client: chat_client.ChatClient) -> gr.Blocks:
                         
                         logs = gr.Textbox(label="Console", 
                                           elem_id="rag-inputs", 
-                                          lines=20, 
-                                          max_lines=20, 
+                                          lines=12, 
+                                          max_lines=12, 
                                           interactive=False)
                         
                     with gr.TabItem("Hide All Settings", id=1) as hide_all_settings:
@@ -201,6 +204,9 @@ def build_page(client: chat_client.ChatClient) -> gr.Blocks:
         clear.click(clear_imgs, [], [])
 
         def load_model(model: str):
+            pipe = None
+            gc.collect()
+            torch.cuda.empty_cache()
             if model == BASE_MODEL:
                 print("--- MODELS: Loading Model " + model + " ---")
                 pipe = StableDiffusionXLPipeline.from_pretrained(

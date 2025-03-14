@@ -11,7 +11,5 @@ git clone https://github.com/huggingface/diffusers && \
     pip install -e .
 cd -
 
-pip install peft==0.9.0 huggingface_hub[cli,torch]==0.21.4
-
 sudo mkdir -p /mnt/cache/
 sudo chown workbench:workbench /mnt/cache/

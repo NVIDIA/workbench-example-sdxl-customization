@@ -1,134 +1,131 @@
 specVersion: v2
 specMinorVersion: 2
 meta:
-  name: sdxl-customization
-  image: project-sdxl-customization
-  description: Image generation customization
-  labels: []
-  createdOn: "2023-08-07T02:40:39Z"
-  defaultBranch: main
+    name: sdxl-customization
+    image: project-sdxl-customization
+    description: Image generation customization
+    labels: []
+    createdOn: "2023-08-07T02:40:39Z"
+    defaultBranch: main
 layout:
-- path: code/
-  type: code
-  storage: git
-- path: models/
-  type: models
-  storage: gitlfs
-- path: data/
-  type: data
-  storage: gitlfs
-- path: data/scratch/
-  type: data
-  storage: gitignore
+    - path: code/
+      type: code
+      storage: git
+    - path: models/
+      type: models
+      storage: gitlfs
+    - path: data/
+      type: data
+      storage: gitlfs
+    - path: data/scratch/
+      type: data
+      storage: gitignore
 environment:
-  base:
-    registry: nvcr.io
-    image: nvidia/pytorch:23.09-py3
-    build_timestamp: "20230322105648"
-    name: Pytorch 23.09 Base Container
-    supported_architectures:
-    - amd64
-    cuda_version: "12.2"
-    description: A base for fine-tuning SDXL with Dreambooth
-    entrypoint_script: ""
-    labels:
-    - ubuntu
-    - python3
-    - jupyterlab
-    - cuda12.2
-    - pytorch2.1
-    apps:
-    - name: inference
-      type: custom
-      class: webapp
-      start_command: cd /project/code/ && PROXY_PREFIX=$PROXY_PREFIX python3 -m chatui
-      health_check_command: curl -f "http://localhost:8080/"
-      stop_command: pkill -f "^python3 -m chatui"
-      user_msg: ""
-      logfile_path: ""
-      timeout_seconds: 60
-      icon_url: ""
-      webapp_options:
-        autolaunch: true
-        port: "8080"
-        proxy:
-          trim_prefix: true
-        url: http://localhost:8080/
-    programming_languages:
-    - python3
-    icon_url: ""
-    image_version: 1.0.0
-    os: linux
-    os_distro: ubuntu
-    os_distro_release: "22.04"
-    schema_version: v2
-    user_info:
-      uid: ""
-      gid: ""
-      username: ""
-    package_managers:
-    - name: pip
-      binary_path: /opt/conda/bin/pip
-      installed_packages: []
-    - name: conda
-      binary_path: /opt/conda/bin/conda
-      installed_packages:
-      - jupyterlab=3.4.4
-      - tensorboard
-      - nodejs
-      - notebook
-      - python=3.10.9
-      - pytorch=2.1.0
-      - torchvision
-      - pytorch-cuda=12.1
-    - name: apt
-      binary_path: /usr/bin/apt
-      installed_packages:
-      - build-essential
-      - ca-certificates
-      - curl
-      - locales
-      - git
-      - git-lfs
-      - openssl=1.1.1f-1ubuntu2.17
-      - libssl1.1=1.1.1f-1ubuntu2.17
-      - vim
-    package_manager_environment:
-      name: ""
-      target: ""
+    base:
+        registry: nvcr.io
+        image: nvidia/pytorch:23.09-py3
+        build_timestamp: "20230322105648"
+        name: Pytorch 23.09 Base Container
+        supported_architectures:
+            - amd64
+        cuda_version: "12.2"
+        description: A base for fine-tuning SDXL with Dreambooth
+        entrypoint_script: ""
+        labels:
+            - ubuntu
+            - python3
+            - jupyterlab
+            - cuda12.2
+            - pytorch2.1
+        apps:
+            - name: inference
+              type: custom
+              class: webapp
+              start_command: cd /project/code/ && PROXY_PREFIX=$PROXY_PREFIX python3 -m chatui
+              health_check_command: curl -f "http://localhost:8080/"
+              stop_command: pkill -f "^python3 -m chatui"
+              user_msg: ""
+              logfile_path: ""
+              timeout_seconds: 60
+              icon_url: ""
+              webapp_options:
+                autolaunch: true
+                port: "8080"
+                proxy:
+                    trim_prefix: true
+                url: http://localhost:8080/
+        programming_languages:
+            - python3
+        icon_url: ""
+        image_version: 1.0.0
+        os: linux
+        os_distro: ubuntu
+        os_distro_release: "22.04"
+        schema_version: v2
+        user_info:
+            uid: ""
+            gid: ""
+            username: ""
+        package_managers:
+            - name: pip
+              binary_path: /opt/conda/bin/pip
+              installed_packages: []
+            - name: conda
+              binary_path: /opt/conda/bin/conda
+              installed_packages:
+                - jupyterlab=3.4.4
+                - tensorboard
+                - nodejs
+                - notebook
+                - python=3.10.9
+                - pytorch=2.1.0
+                - torchvision
+                - pytorch-cuda=12.1
+            - name: apt
+              binary_path: /usr/bin/apt
+              installed_packages:
+                - build-essential
+                - ca-certificates
+                - curl
+                - locales
+                - git
+                - git-lfs
+                - openssl=1.1.1f-1ubuntu2.17
+                - libssl1.1=1.1.1f-1ubuntu2.17
+                - vim
+        package_manager_environment:
+            name: ""
+            target: ""
+    compose_file_path: ""
 execution:
-  apps:
-  - name: jupyterlab
-    type: jupyterlab
-    class: webapp
-    start_command: jupyter lab --allow-root --port 8888 --ip 0.0.0.0 --no-browser
-      --NotebookApp.base_url=\$PROXY_PREFIX --NotebookApp.default_url=/lab
-    health_check_command: '[ \$(echo url=\$(jupyter lab list 2>&1 | head -n 2 | tail
-      -n 1 | cut -f1 -d'''' '''' | grep -v ''''Currently'''' | sed ''''s@/?@/lab?@g'''')
-      | curl -o /dev/null -s -w ''''%{http_code}'''' --config -) == ''''200'''' ]'
-    stop_command: jupyter lab stop 8888
-    user_msg: ""
-    logfile_path: ""
-    timeout_seconds: 60
-    icon_url: ""
-    webapp_options:
-      autolaunch: true
-      port: "8888"
-      proxy:
-        trim_prefix: false
-      url_command: jupyter lab list 2>&1 | head -n 2 | tail -n 1 | cut -f1 -d' ' |
-        grep -v 'Currently'
-  resources:
-    gpu:
-      requested: 1
-    sharedMemoryMB: 1024
-  secrets: []
-  mounts:
-  - type: project
-    target: /project/
-    description: Project directory
-    options: rw
-  - type: volume
-    target: /mnt/cache/
-    description: Huggingface cache root
-    options: ""
+    apps:
+        - name: jupyterlab
+          type: jupyterlab
+          class: webapp
+          start_command: jupyter lab --allow-root --port 8888 --ip 0.0.0.0 --no-browser --NotebookApp.base_url=\$PROXY_PREFIX --NotebookApp.default_url=/lab --notebook-dir=/project/
+          health_check_command: '[ \$(echo url=\$(jupyter lab list 2>&1 | head -n 2 | tail -n 1 | cut -f1 -d'''' '''' | grep -v ''''Currently'''' | sed ''''s@/?@/lab?@g'''') | curl -o /dev/null -s -w ''''%{http_code}'''' --config -) == ''''200'''' ]'
+          stop_command: jupyter lab stop 8888
+          user_msg: ""
+          logfile_path: ""
+          timeout_seconds: 60
+          icon_url: ""
+          webapp_options:
+            autolaunch: true
+            port: "8888"
+            proxy:
+                trim_prefix: false
+            url_command: jupyter lab list 2>&1 | head -n 2 | tail -n 1 | cut -f1 -d' ' | grep -v 'Currently'
+    resources:
+        gpu:
+            requested: 1
+        sharedMemoryMB: 1024
+    secrets: []
+    mounts:
+        - type: project
+          target: /project/
+          description: Project directory
+          options: rw
+        - type: volume
+          target: /mnt/cache/
+          description: Huggingface cache root
+          options: ""

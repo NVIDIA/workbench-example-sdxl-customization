@@ -3,6 +3,7 @@
 *cuda.CUDA
 *defaults.EnvVars
 *defaults.Readme
+*defaults.CA
 *defaults.Entrypoint
 *apt.PackageManager
 *bash.PreLanguage

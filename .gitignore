@@ -57,3 +57,4 @@ coverage.xml
 .pytest_cache/
 cover/
 code/output.log
+data/generated_images/

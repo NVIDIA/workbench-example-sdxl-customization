@@ -46,7 +46,7 @@ environment:
               stop_command: pkill -f "^python3 -m chatui"
               user_msg: ""
               logfile_path: ""
-              timeout_seconds: 60
+              timeout_seconds: 120
               icon_url: ""
               webapp_options:
                 autolaunch: true

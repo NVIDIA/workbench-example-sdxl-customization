@@ -12,4 +12,4 @@ git clone https://github.com/huggingface/diffusers && \
 cd -
 
 sudo mkdir -p /mnt/cache/
-sudo chown workbench:workbench /mnt/cache/
+sudo chown $NVWB_UID:$NVWB_GID /mnt/cache/

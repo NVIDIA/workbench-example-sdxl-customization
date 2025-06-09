@@ -1,9 +1,9 @@
 *defaults.ContainerUser
 *bash.PreBuild
+*defaults.CA
 *cuda.CUDA
 *defaults.EnvVars
 *defaults.Readme
-*defaults.CA
 *defaults.Entrypoint
 *apt.PackageManager
 *bash.PreLanguage

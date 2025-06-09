@@ -4,12 +4,5 @@
 #
 # Note: This file may be removed if you don't need to use it
 
-
-cd /workspace
-git clone https://github.com/huggingface/diffusers && \
-    cd diffusers && \
-    pip install -e .
-cd -
-
 sudo mkdir -p /mnt/cache/
 sudo chown $NVWB_UID:$NVWB_GID /mnt/cache/

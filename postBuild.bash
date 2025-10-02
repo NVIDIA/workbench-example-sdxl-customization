@@ -10,5 +10,8 @@ git clone https://github.com/huggingface/diffusers && \
     pip install -e .
 cd -
 
+sudo pip uninstall torch torchvision torchaudio -y
+sudo pip install --pre torch torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu130
+
 sudo mkdir -p /mnt/cache/
 sudo chown $NVWB_UID:$NVWB_GID /mnt/cache/

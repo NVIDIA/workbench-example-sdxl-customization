@@ -118,7 +118,7 @@ overrides==7.7.0
 packaging==23.1
 pandocfilters==1.5.0
 parso==0.8.3
-peft==0.15.2
+peft==0.17.0
 pexpect==4.8.0
 pfzy==0.3.4
 pickleshare==0.7.5
@@ -192,8 +192,6 @@ tokenizers==0.21.1
 toml==0.10.2
 tomli==2.0.1
 tomlkit==0.12.0
-torch==2.6.0
-torchvision==0.21.0
 tornado==6.3.3
 tqdm==4.66.1
 traitlets==5.9.0

@@ -7,7 +7,7 @@
 # Get the machine architecture
 ARCH=$(uname -m)
 
-# If ARM architecture, user is on DGX Spark
+# If ARM architecture, user is on DGX Spark. Update base container image to CUDA 13.0.
 if [[ "$ARCH" == "arm"* || "$ARCH" == "aarch64" ]]; then
     echo "Detected ARM architecture. User is on Spark; installing CUDA 13.0"
     cd /tmp
@@ -21,6 +21,3 @@ if [[ "$ARCH" == "arm"* || "$ARCH" == "aarch64" ]]; then
 else
     echo "Architecture is not ARM. Skipping CUDA 13.0"
 fi
-
-# Update base container image to CUDA 13.0 (DGX Spark)
-

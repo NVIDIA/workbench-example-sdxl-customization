@@ -10,9 +10,12 @@ ARCH=$(uname -m)
 cd /workspace
 git clone https://github.com/huggingface/diffusers && \
     cd diffusers && \
+    git checkout 0974b4c6067165434fa715654b355b41beb5fceb && \
     pip install -e .
 cd -
 
+# Match diffusers package version
+sudo pip install huggingface-hub==0.34.0
 
 if [[ "$ARCH" == "arm"* || "$ARCH" == "aarch64" ]]; then
     # If ARM architecture, user is on DGX Spark

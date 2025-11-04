@@ -1,0 +1,1 @@
+{"schema":"v1","records":[{"type":"ENVIRONMENT","operation":"CREATED","data":[{"data":"Added packages through pip package manager: huggingface-hub==0.34.0","mime":"text/plain"}],"important":null},{"type":"ENVIRONMENT","operation":"DELETED","data":[{"data":"Removed packages through pip package manager: huggingface-hub==0.32.4","mime":"text/plain"}],"important":null}]}
